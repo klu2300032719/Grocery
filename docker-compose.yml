@@ -1,60 +1,48 @@
-# docker-compose.yml
-version: "3.9"
-
 services:
-  mysql-db:
-    image: mysql:8.0
+  mysqldb:
     container_name: mysql-db-new
-    restart: always
+    image: mysql:8
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: grocery
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: docker
+      MYSQL_DATABASE: grocerydb
     ports:
-      - "3306:3306"
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-u", "root", "-prootpassword"]
-      interval: 10s
-      retries: 5
+      - "3309:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+    networks:
+      - springboot-mysql-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pdocker"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
-  springboot:
-    build: ./GroceryStoreApplication
+  backend:
+    image: hemavarshiniramesh/grocery-backend:latest
     container_name: springboot
-    restart: always
+    ports:
+      - "2026:8080"
     depends_on:
-      mysql-db:
+      mysqldb:
         condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/grocery
-      SPRING_DATASOURCE_USERNAME: user
-      SPRING_DATASOURCE_PASSWORD: password
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SERVER_PORT: 8080
-    ports:
-      - "2026:8080"  # Expose backend to host
+    restart: on-failure
     networks:
-      - grocery-network
+      - springboot-mysql-net
 
-  react:
-    build: ./frontend
+  frontend:
+    image: hemavarshiniramesh/grocery-frontend:latest
     container_name: react
-    restart: always
-    environment:
-      VITE_API_BASE_URL: http://springboot:8080/api
-      VITE_CURRENCY: "₹"
     ports:
-      - "5173:5173"  # Vite dev server
+      - "3000:80"
     depends_on:
-      - springboot
+      - backend
+    restart: on-failure
     networks:
-      - grocery-network
+      - springboot-mysql-net
 
 volumes:
   mysql-data:
 
 networks:
-  grocery-network:
+  springboot-mysql-net:
     driver: bridge
