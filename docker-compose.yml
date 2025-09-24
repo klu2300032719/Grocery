@@ -6,7 +6,7 @@ services:
       MYSQL_ROOT_PASSWORD: docker
       MYSQL_DATABASE: grocerydb
     ports:
-      - "3307:3306"
+      - "3309:3306"
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
