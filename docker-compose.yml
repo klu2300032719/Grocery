@@ -1,6 +1,6 @@
 services:
   mysqldb:
-    container_name: mysql-db
+    container_name: mysql-db-new
     image: mysql:8
     environment:
       MYSQL_ROOT_PASSWORD: docker
