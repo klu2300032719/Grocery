@@ -11,7 +11,7 @@ services:
       - mysql-data:/var/lib/mysql
     networks:
       - springboot-mysql-net
-    healthcheck:   # ✅ Add healthcheck
+    healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pdocker"]
       interval: 10s
       timeout: 5s
@@ -22,7 +22,7 @@ services:
     container_name: springboot
     ports:
       - "2026:8080"
-    depends_on:     # ✅ Now Spring Boot waits for MySQL
+    depends_on:
       mysqldb:
         condition: service_healthy
     restart: on-failure
