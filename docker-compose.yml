@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   mysqldb:
     container_name: mysql-db
@@ -15,10 +17,10 @@ services:
       - springboot-mysql-net
 
   backend:
-    image: klu2300032719/grocery-backend:latest
+    image: hemavarshiniramesh/grocery-backend:latest   # Correct Docker Hub username
     container_name: springboot
     ports:
-      - "2025:2026"
+      - "2025:8080"   # Match Spring Boot default port 8080
     depends_on:
       - mysqldb
     restart: on-failure
@@ -26,7 +28,7 @@ services:
       - springboot-mysql-net
 
   frontend:
-    image: klu2300032719/grocery-frontend:latest
+    image: hemavarshiniramesh/grocery-frontend:latest  # Correct Docker Hub username
     container_name: react
     ports:
       - "3000:80"
