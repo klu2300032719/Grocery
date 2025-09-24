@@ -1,0 +1,6 @@
+package com.klef.fsd.springboot.repository;
+
+@repo
+public class CartItemRepository {
+
+}

@@ -1,0 +1,7 @@
+package com.klef.fsd.springboot.repository;
+
+
+@repository
+public class OrderRepository {
+
+}

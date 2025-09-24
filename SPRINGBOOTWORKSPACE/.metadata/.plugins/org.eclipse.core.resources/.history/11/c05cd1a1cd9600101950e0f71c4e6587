@@ -1,0 +1,12 @@
+package com.klef.fsd.springboot.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="cart_table")
+public class Cart {
+	@o
+	
+
+}

@@ -1,0 +1,6 @@
+package com.klef.fsd.springboot.repository;
+
+@repos
+public class AddressRepository {
+
+}
