@@ -10,7 +10,9 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - mysql-data:/var/lib/mysql   # volume added here
+      - mysql-data:/var/lib/mysql
+    networks:
+      - springboot-mysql-net
 
   backend:
     image: klu2300032719/grocery-backend:latest
@@ -37,3 +39,8 @@ services:
 # Declare volumes at the bottom
 volumes:
   mysql-data:
+
+# Declare networks at the bottom
+networks:
+  springboot-mysql-net:
+    driver: bridge
