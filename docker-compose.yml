@@ -6,28 +6,28 @@ services:
       MYSQL_ROOT_PASSWORD: docker
       MYSQL_DATABASE: grocerydb
     ports:
-      - "3309:3306"   # Host port 3309 → Container port 3306
+      - "3309:3306"
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
       - springboot-mysql-net
+    healthcheck:   # ✅ Add healthcheck
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pdocker"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   backend:
     image: hemavarshiniramesh/grocery-backend:latest
     container_name: springboot
     ports:
-      - "2026:8080"   # Host port 2026 → Container port 8080
-    depends_on:
-      - mysqldb
+      - "2026:8080"
+    depends_on:     # ✅ Now Spring Boot waits for MySQL
+      mysqldb:
+        condition: service_healthy
     restart: on-failure
     networks:
       - springboot-mysql-net
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db-new:3306/grocerydb
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: docker
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SPRING_JPA_SHOW_SQL: "true"
 
   frontend:
     image: hemavarshiniramesh/grocery-frontend:latest
