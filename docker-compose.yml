@@ -16,7 +16,7 @@ services:
     image: hemavarshiniramesh/grocery-backend:latest
     container_name: springboot
     ports:
-      - "2025:8080"
+      - "2026:8080"
     depends_on:
       - mysqldb
     restart: on-failure
