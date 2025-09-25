@@ -6,7 +6,7 @@ services:
       MYSQL_ROOT_PASSWORD: docker
       MYSQL_DATABASE: grocerydb
     ports:
-      - "3309:3306"
+      - "3309:3306"   # host 3309 → container 3306
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
@@ -20,7 +20,7 @@ services:
   backend:
     image: hemvavarshiniramesh/grocery-backend:latest
     ports:
-      - "2026:2026"
+      - "2026:2026"   # host 2026 → container 2026
     depends_on:
       mysqldb:
         condition: service_healthy
@@ -36,7 +36,7 @@ services:
   frontend:
     image: hemvavarshiniramesh/grocery-frontend:latest
     ports:
-      - "3000:80"
+      - "3000:80"   # host 3000 → container 80 (React build served by Nginx)
     depends_on:
       backend:
         condition: service_healthy
