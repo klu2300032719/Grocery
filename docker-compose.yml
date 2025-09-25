@@ -1,48 +1,46 @@
+version: "3.9"
+
 services:
-  mysqldb:
+  mysql-db-new:
+    image: mysql:8.0
     container_name: mysql-db-new
-    image: mysql:8
     environment:
       MYSQL_ROOT_PASSWORD: docker
       MYSQL_DATABASE: grocerydb
     ports:
-      - "3309:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-    networks:
-      - springboot-mysql-net
+      - "3307:3306"   # map MySQL to localhost:3307
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pdocker"]
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  backend:
-    image: hemavarshiniramesh/grocery-backend:latest
+  springboot:
+    build: ./GroceryStoreApplication
     container_name: springboot
-    ports:
-      - "2026:8080"
     depends_on:
-      mysqldb:
+      mysql-db-new:
         condition: service_healthy
-    restart: on-failure
-    networks:
-      - springboot-mysql-net
-
-  frontend:
-    image: hemavarshiniramesh/grocery-frontend:latest
-    container_name: react
     ports:
-      - "3000:80"
-    depends_on:
-      - backend
-    restart: on-failure
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     networks:
-      - springboot-mysql-net
+      - greencart-network
 
-volumes:
-  mysql-data:
+  react:
+    build: ./frontend
+    container_name: react
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_BACKEND_URL=http://springboot:8080
+    depends_on:
+      - springboot
+    networks:
+      - greencart-network
 
 networks:
-  springboot-mysql-net:
+  greencart-network:
     driver: bridge
