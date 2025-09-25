@@ -1717,3 +1717,29 @@
 2025-09-24 16:08:31,715 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
 2025-09-24 16:08:31,805 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2025-09-24 16:08:31,830 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\hemav\OneDrive\Desktop\GREENCART\SPRINGBOOTWORKSPACE\GroceryStoreApplication\src\test\resources
+2025-09-25 15:52:19,366 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-09-25 15:52:37,665 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-25 15:52:37,728 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-25 15:52:37,756 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\hemav\OneDrive\Desktop\GREENCART\SPRINGBOOTWORKSPACE\GroceryStoreApplication\src\test\resources
+2025-09-25 15:52:45,733 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-25 15:52:45,754 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-25 15:52:45,762 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\hemav\OneDrive\Desktop\GREENCART\SPRINGBOOTWORKSPACE\GroceryStoreApplication\src\test\resources
+2025-09-25 15:52:49,908 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-25 15:52:49,918 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-25 15:52:49,925 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\hemav\OneDrive\Desktop\GREENCART\SPRINGBOOTWORKSPACE\GroceryStoreApplication\src\test\resources
+2025-09-25 15:52:52,325 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-25 15:52:52,338 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-25 15:52:52,344 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\hemav\OneDrive\Desktop\GREENCART\SPRINGBOOTWORKSPACE\GroceryStoreApplication\src\test\resources
+2025-09-25 15:52:54,874 [Worker-25: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-25 15:52:54,888 [Worker-25: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-25 15:52:54,893 [Worker-25: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\hemav\OneDrive\Desktop\GREENCART\SPRINGBOOTWORKSPACE\GroceryStoreApplication\src\test\resources
+2025-09-25 15:52:59,871 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-25 15:52:59,896 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-25 15:52:59,905 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\hemav\OneDrive\Desktop\GREENCART\SPRINGBOOTWORKSPACE\GroceryStoreApplication\src\test\resources
+2025-09-25 15:53:05,255 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-25 15:53:05,265 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-25 15:53:05,271 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\hemav\OneDrive\Desktop\GREENCART\SPRINGBOOTWORKSPACE\GroceryStoreApplication\src\test\resources
+2025-09-25 15:53:11,080 [Worker-23: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-25 15:53:11,091 [Worker-23: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-25 15:53:11,098 [Worker-23: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\hemav\OneDrive\Desktop\GREENCART\SPRINGBOOTWORKSPACE\GroceryStoreApplication\src\test\resources
+2025-09-25 15:55:17,199 [Worker-25: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes

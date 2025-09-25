@@ -1,52 +1,39 @@
-
 services:
   mysqldb:
+    container_name: mysql-db
     image: mysql:8
     environment:
       MYSQL_ROOT_PASSWORD: docker
-      MYSQL_DATABASE: grocerydb
+      MYSQL_DATABASE: grocery
+      # MYSQL_USER: klu
+      # MYSQL_PASSWORD: klu
     ports:
-      - "3309:3306"   # host 3309 → container 3306
+      - "3309:3306"
     volumes:
-      - mysql-data:/var/lib/mysql
-    networks:
-      - springboot-mysql-net
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pdocker"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      - mysql-data:/var/lib/mysql   # volume added here
 
   backend:
-    image: hemvavarshiniramesh/grocery-backend:latest
+    image: hemavarshiniramesh/grocery-backend:latest
+    container_name: springboot
     ports:
-      - "2026:2026"   # host 2026 → container 2026
+      - "2025:2026"
     depends_on:
-      mysqldb:
-        condition: service_healthy
+      - mysqldb
     restart: on-failure
     networks:
       - springboot-mysql-net
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:2026/ || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
 
   frontend:
-    image: hemvavarshiniramesh/grocery-frontend:latest
+    image: hemavarshiniramesh/grocery-frontend:latest
+    container_name: react
     ports:
-      - "3000:80"   # host 3000 → container 80 (React build served by Nginx)
+      - "3000:80"
     depends_on:
-      backend:
-        condition: service_healthy
+      - backend
     restart: on-failure
     networks:
       - springboot-mysql-net
 
+# Declare volumes at the bottom
 volumes:
   mysql-data:
-
-networks:
-  springboot-mysql-net:
-    driver: bridge
