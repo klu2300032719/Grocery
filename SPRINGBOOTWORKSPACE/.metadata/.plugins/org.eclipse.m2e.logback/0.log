@@ -1743,3 +1743,11 @@
 2025-09-25 15:53:11,091 [Worker-23: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2025-09-25 15:53:11,098 [Worker-23: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\hemav\OneDrive\Desktop\GREENCART\SPRINGBOOTWORKSPACE\GroceryStoreApplication\src\test\resources
 2025-09-25 15:55:17,199 [Worker-25: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-25 15:55:17,218 [Worker-25: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-25 15:55:17,227 [Worker-25: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\hemav\OneDrive\Desktop\GREENCART\SPRINGBOOTWORKSPACE\GroceryStoreApplication\src\test\resources
+2025-09-25 15:55:21,706 [Worker-6: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-25 15:55:21,717 [Worker-6: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-25 15:55:21,722 [Worker-6: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\hemav\OneDrive\Desktop\GREENCART\SPRINGBOOTWORKSPACE\GroceryStoreApplication\src\test\resources
+2025-09-25 15:55:28,070 [Worker-6: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-25 15:55:28,093 [Worker-6: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-25 15:55:28,100 [Worker-6: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\hemav\OneDrive\Desktop\GREENCART\SPRINGBOOTWORKSPACE\GroceryStoreApplication\src\test\resources
