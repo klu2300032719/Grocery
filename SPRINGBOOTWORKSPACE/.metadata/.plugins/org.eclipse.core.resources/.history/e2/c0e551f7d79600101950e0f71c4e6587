@@ -1,6 +1,0 @@
-package com.klef.fsd.springboot.repository;
-
-@
-public class CartRepository {
-
-}

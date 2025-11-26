@@ -18,7 +18,7 @@ services:
     image: hemavarshiniramesh/grocery-backend:latest
     container_name: springboot
     ports:
-      - "2028:2026"
+      - "2028:2028"
     depends_on:
       - mysqldb
     restart: on-failure
@@ -29,7 +29,7 @@ services:
     image: hemavarshiniramesh/grocery-frontend:latest
     container_name: react
     ports:
-      - "3000:80"
+      - "4000:80"
     depends_on:
       - backend
     restart: on-failure

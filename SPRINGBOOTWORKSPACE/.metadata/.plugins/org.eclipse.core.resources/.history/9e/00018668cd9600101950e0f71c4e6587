@@ -1,7 +1,0 @@
-package com.klef.fsd.springboot.model;
-
-@entit
-public class Cart {
-	
-
-}
