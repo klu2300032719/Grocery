@@ -1,5 +1,4 @@
 
-
 services:
   mysql-db:
     image: mysql:8
@@ -8,40 +7,38 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: docker
       MYSQL_DATABASE: grocery
+    volumes:
+      - mysql-data:/var/lib/mysql
     ports:
       - "3309:3306"
     networks:
       - springboot-mysql-net
-    volumes:
-      - mysql-data:/var/lib/mysql
 
   springboot:
     build:
-      context: ./SPRINGBOOTWORKSPACE
+      context: ./SPRINGBOOTWORKSPACE/GroceryStoreApplication  # Folder containing backend
       dockerfile: backend.Dockerfile
-    image: hemavarshiniramesh/grocery-backend:latest
     container_name: springboot
     depends_on:
       - mysql-db
+    ports:
+      - "2028:2026"
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/grocery?allowPublicKeyRetrieval=true&useSSL=false
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: docker
-    ports:
-      - "2028:2026"
     networks:
       - springboot-mysql-net
 
   react:
     build:
-      context: ./client
+      context: ./client            # frontend root folder
       dockerfile: frontend.Dockerfile
-    image: hemavarshiniramesh/grocery-frontend:latest
     container_name: react
-    depends_on:
-      - springboot
     ports:
       - "4000:80"
+    depends_on:
+      - springboot
     networks:
       - springboot-mysql-net
 
