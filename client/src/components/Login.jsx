@@ -5,8 +5,7 @@ import toast from "react-hot-toast";
 
 const Login = () => {
   const { setShowUserLogin, setUser } = useAppContext();
-  const [state, setState] = useState("login"); // login or register
-
+  const [state, setState] = useState("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,18 +14,14 @@ const Login = () => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-
     try {
       if (state === "login") {
-        // LOGIN API → /login
-        const res = await api.post("/login", { email, password });
+        const res = await api.post("/auth/login", { email, password });
         setUser(res.data);
         toast.success("Login successful!");
         setShowUserLogin(false);
-
       } else {
-        // REGISTER API → /register
-        await api.post("/register", {
+        await api.post("/auth/register", {
           name,
           email,
           username: email.split("@")[0],
@@ -62,89 +57,42 @@ const Login = () => {
           <>
             <div className="w-full">
               <p>Name</p>
-              <input
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                placeholder="type here"
-                className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary"
-                type="text"
-                required
-              />
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} required className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary" />
             </div>
 
             <div className="w-full">
               <p>Phone</p>
-              <input
-                onChange={(e) => setPhone(e.target.value)}
-                value={phone}
-                placeholder="type here"
-                className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary"
-                type="text"
-                required
-              />
+              <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} required className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary" />
             </div>
 
             <div className="w-full">
               <p>Address</p>
-              <input
-                onChange={(e) => setAddress(e.target.value)}
-                value={address}
-                placeholder="type here"
-                className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary"
-                type="text"
-                required
-              />
+              <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} required className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary" />
             </div>
           </>
         )}
 
         <div className="w-full">
           <p>Email</p>
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            placeholder="type here"
-            className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary"
-            type="email"
-            required
-          />
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary" />
         </div>
 
         <div className="w-full">
           <p>Password</p>
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            placeholder="type here"
-            className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary"
-            type="password"
-            required
-          />
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary" />
         </div>
 
         {state === "register" ? (
-          <p>
-            Already have an account?{" "}
-            <span
-              onClick={() => setState("login")}
-              className="text-primary cursor-pointer"
-            >
-              click here
-            </span>
+          <p>Already have account?
+            <span className="text-primary cursor-pointer" onClick={() => setState("login")}> click here</span>
           </p>
         ) : (
-          <p>
-            Create an account?{" "}
-            <span
-              onClick={() => setState("register")}
-              className="text-primary cursor-pointer"
-            >
-              click here
-            </span>
+          <p>Create an account?
+            <span className="text-primary cursor-pointer" onClick={() => setState("register")}> click here</span>
           </p>
         )}
 
-        <button className="bg-primary hover:bg-primary-dull transition-all text-white w-full py-2 rounded-md cursor-pointer">
+        <button className="bg-primary hover:bg-primary-dull transition-all text-white w-full py-2 rounded-md">
           {state === "register" ? "Create Account" : "Login"}
         </button>
       </form>
