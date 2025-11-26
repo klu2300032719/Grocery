@@ -1,7 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import api from "../api"; // ✅ axios instance
+import api from "../api"; // axios instance
 
 // Create Context
 export const AppContext = createContext();
@@ -18,75 +18,97 @@ export const AppContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
 
-  // ✅ Fetch products from backend
+  // Fallback sample data
+  const defaultProducts = [
+    {
+      id: 1,
+      name: "Fresh Apples",
+      description: "Crisp and sweet apples.",
+      price: 150,
+      offerPrice: 120,
+      category: "Fresh Fruits",
+      stockQuantity: 20,
+      imageUrl: "https://via.placeholder.com/200",
+    },
+    {
+      id: 2,
+      name: "Basmati Rice",
+      description: "Premium long grain rice.",
+      price: 200,
+      offerPrice: 180,
+      category: "Grains & Cereals",
+      stockQuantity: 30,
+      imageUrl: "https://via.placeholder.com/200",
+    },
+  ];
+
+  // Fetch products from backend
   const fetchProducts = async () => {
     try {
       const res = await api.get("/products");
-      setProducts(res.data || []);
+
+      if (res.data?.length === 0) {
+        console.warn("⚠ No products found – Using sample data");
+        setProducts(defaultProducts);
+      } else {
+        setProducts(res.data);
+      }
     } catch (err) {
       console.error("❌ Error fetching products:", err);
-      toast.error("Failed to load products");
+      toast.error("Failed to load products. Showing sample data.");
+      setProducts(defaultProducts); // fallback
     }
   };
 
-  // ✅ Add Product to cart
+  // Add Product to cart
   const addToCart = (itemId) => {
-    setCartItems((prev) => {
-      const updated = { ...prev };
-      updated[itemId] = (updated[itemId] || 0) + 1;
-      return updated;
-    });
+    setCartItems((prev) => ({
+      ...prev,
+      [itemId]: (prev[itemId] || 0) + 1,
+    }));
     toast.success("Added to Cart");
   };
 
-  // ✅ Update cart item quantity
+  // Update cart item quantity
   const updateCartItem = (itemId, quantity) => {
-    setCartItems((prev) => {
-      const updated = { ...prev, [itemId]: quantity };
-      return updated;
-    });
+    setCartItems((prev) => ({
+      ...prev,
+      [itemId]: quantity,
+    }));
     toast.success("Cart Updated");
   };
 
-  // ✅ Remove product from cart
+  // Remove product from cart
   const removeFromCart = (itemId) => {
     setCartItems((prev) => {
       const updated = { ...prev };
-      if (updated[itemId]) {
-        updated[itemId] -= 1;
-        if (updated[itemId] <= 0) {
-          delete updated[itemId];
-        }
-      }
+      updated[itemId] = (updated[itemId] || 0) - 1;
+
+      if (updated[itemId] <= 0) delete updated[itemId];
       return updated;
     });
     toast.success("Removed from Cart");
   };
 
-  // ✅ Get total cart item count
-  const getCartCount = () => {
-    return Object.values(cartItems).reduce((a, b) => a + b, 0);
-  };
+  const getCartCount = () =>
+    Object.values(cartItems).reduce((a, b) => a + b, 0);
 
-  // ✅ Get cart total amount
   const getCartAmount = () => {
-    let totalAmount = 0;
+    let total = 0;
     for (const itemId in cartItems) {
       const product = products.find((p) => p.id === parseInt(itemId));
       if (product) {
-        const price = product.offerPrice || product.price; // ✅ fallback to price
-        totalAmount += price * cartItems[itemId];
+        const price = product.offerPrice || product.price;
+        total += price * cartItems[itemId];
       }
     }
-    return Math.floor(totalAmount * 100) / 100;
+    return Math.floor(total * 100) / 100;
   };
 
-  // ✅ Fetch products when app loads
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  // ✅ Context value
   const value = {
     navigate,
     user,
@@ -110,7 +132,5 @@ export const AppContextProvider = ({ children }) => {
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
-// ✅ Custom hook for consuming context
-export const useAppContext = () => {
-  return useContext(AppContext);
-};
+// Custom Hook
+export const useAppContext = () => useContext(AppContext);

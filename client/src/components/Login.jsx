@@ -5,7 +5,8 @@ import toast from "react-hot-toast";
 
 const Login = () => {
   const { setShowUserLogin, setUser } = useAppContext();
-  const [state, setState] = useState("login"); // "login" or "register"
+  const [state, setState] = useState("login"); // login or register
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,24 +18,25 @@ const Login = () => {
 
     try {
       if (state === "login") {
-        // ✅ Login API
-        const res = await api.post("/auth/login", { email, password });
+        // LOGIN API → /login
+        const res = await api.post("/login", { email, password });
         setUser(res.data);
         toast.success("Login successful!");
         setShowUserLogin(false);
+
       } else {
-        // ✅ Signup API
-        await api.post("/auth/register", {
+        // REGISTER API → /register
+        await api.post("/register", {
           name,
           email,
-          username: email.split("@")[0], // simple default username
+          username: email.split("@")[0],
           password,
           phone,
           role: "USER",
           address,
         });
         toast.success("Account created! Please login.");
-        setState("login"); // switch back to login form
+        setState("login");
       }
     } catch (err) {
       toast.error(err.response?.data || "Something went wrong");
@@ -96,7 +98,7 @@ const Login = () => {
           </>
         )}
 
-        <div className="w-full ">
+        <div className="w-full">
           <p>Email</p>
           <input
             onChange={(e) => setEmail(e.target.value)}
@@ -108,7 +110,7 @@ const Login = () => {
           />
         </div>
 
-        <div className="w-full ">
+        <div className="w-full">
           <p>Password</p>
           <input
             onChange={(e) => setPassword(e.target.value)}
@@ -122,7 +124,7 @@ const Login = () => {
 
         {state === "register" ? (
           <p>
-            Already have account?{" "}
+            Already have an account?{" "}
             <span
               onClick={() => setState("login")}
               className="text-primary cursor-pointer"
