@@ -31,7 +31,6 @@ export const AppContextProvider = ({ children }) => {
       ...prev,
       [itemId]: (prev[itemId] || 0) + 1,
     }));
-    toast.success("Added to Cart");
   };
 
   const updateCartItem = (itemId, quantity) => {
@@ -50,8 +49,7 @@ export const AppContextProvider = ({ children }) => {
     });
   };
 
-  const getCartCount = () =>
-    Object.values(cartItems).reduce((a, b) => a + b, 0);
+  const getCartCount = () => Object.values(cartItems).reduce((a, b) => a + b, 0);
 
   const getCartAmount = () => {
     let total = 0;
