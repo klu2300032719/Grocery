@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:2028",  // backend running inside Docker
+  baseURL: import.meta.env.VITE_API_BASE_URL || "http://springboot:2026",
 });
 
 export default api;
