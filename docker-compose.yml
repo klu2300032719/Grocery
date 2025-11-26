@@ -20,7 +20,7 @@ services:
     depends_on:
       - mysql-db
     ports:
-      - "2028:2028"
+      - "2028:2026"
     networks:
       - springboot-mysql-net
     environment:
