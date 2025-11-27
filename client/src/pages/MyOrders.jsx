@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useAppContext } from '../context/AppContext';
-import { dummyOrders } from '../assets/assets';
+import React, { useEffect, useState } from "react";
+import { useAppContext } from "../context/AppContext";
+import { dummyOrders } from "../assets/assets";
 
 const MyOrders = () => {
   const [myOrders, setMyOrders] = useState([]);
-  const { currency } = useAppContext();
-
-  const fetchMyOrders = async () => {
-    setMyOrders(dummyOrders);
-  };
+  const { currency, products, navigate } = useAppContext();
 
   useEffect(() => {
-    fetchMyOrders();
+    setMyOrders(dummyOrders);
   }, []);
+
+  const getProductDetails = (productId) => {
+    return products.find((p) => Number(p.id) === Number(productId));
+  };
 
   return (
     <div className="mt-16 pb-16">
@@ -35,45 +35,59 @@ const MyOrders = () => {
             </span>
           </p>
 
-          {order.items.map((item, index) => (
-            <div
-              key={index}
-              className={`relative bg-white text-gray-500/70 ${
-                order.items.length !== index + 1 && 'border-b'
-              } border-gray-300 flex flex-col md:flex-row md:items-center justify-between p-4 py-5 md:gap-16 w-full max-w-4xl`}
-            >
-              <div className="flex items-center mb-4 md:mb-0">
-                <div className="bg-primary/10 p-4 rounded-lg">
-                  <img
-                    src={
-                      item.product.imageUrl ||
-                      item.product.image_url ||
-                      '/fallback.png'
-                    }
-                    className="w-16 h-16 object-cover"
-                    alt={item.product.name}
-                  />
-                </div>
-                <div className="ml-4">
-                  <h2 className="text-xl font-medium text-gray-800">
-                    {item.product.name}
-                  </h2>
-                  <p>Category: {item.product.category}</p>
-                </div>
-              </div>
+          {order.items.map((item, i) => {
+            const product = getProductDetails(item.productId);
 
-              <div className="flex flex-col justify-center mb-4 md:mb-0">
-                <p>Quantity: {item.quantity || '1'}</p>
-                <p>Status: {order.status}</p>
-                <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
-              </div>
+            if (!product) {
+              return (
+                <div key={i} className="border-b border-gray-300 p-4">
+                  <p className="text-red-600">Product not found</p>
+                </div>
+              );
+            }
 
-              <p className="text-primary text-lg font-medium">
-                Amount: {currency}
-                {item.product.offerPrice * item.quantity}
-              </p>
-            </div>
-          ))}
+            const imageUrl =
+              product.imageUrl || product.image_url || "/fallback.png";
+
+            return (
+              <div
+                key={i}
+                className={`relative bg-white text-gray-500/70 ${
+                  order.items.length !== i + 1 && "border-b"
+                } border-gray-300 flex flex-col md:flex-row md:items-center justify-between p-4 py-5 md:gap-16 w-full max-w-4xl`}
+              >
+                <div className="flex items-center mb-4 md:mb-0">
+                  <div
+                    className="bg-primary/10 p-4 rounded-lg cursor-pointer"
+                    onClick={() => navigate(`/products/${product.id}`)}
+                  >
+                    <img
+                      src={imageUrl}
+                      className="w-16 h-16 object-cover"
+                      alt={product.name}
+                    />
+                  </div>
+                  <div className="ml-4">
+                    <h2 className="text-xl font-medium text-gray-800">
+                      {product.name}
+                    </h2>
+                    <p>Category: {product.category}</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col justify-center mb-4 md:mb-0">
+                  <p>Quantity: {item.quantity || "1"}</p>
+                  <p>Status: {order.status}</p>
+                  <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
+                </div>
+
+                <p className="text-primary text-lg font-medium">
+                  Amount: {currency}
+                  {(product.offerPrice || product.price) * item.quantity}
+                </p>
+              </div>
+            );
+          })}
         </div>
       ))}
     </div>
