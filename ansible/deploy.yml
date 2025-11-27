@@ -1,0 +1,55 @@
+---
+- name: Deploy Grocery App to Kubernetes using Ansible
+  hosts: local
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+    - name: Start Minikube if not running
+      command: minikube start
+      register: minikube_output
+      ignore_errors: yes
+
+    - debug:
+        var: minikube_output.stdout_lines
+
+    - name: Create namespace if not exists
+      command: kubectl create namespace grocery
+      ignore_errors: yes
+
+    - name: Apply Kubernetes Manifests
+      command: kubectl apply -f {{ item }} -n grocery
+      with_items:
+        - ../k8s/mysql-deployment.yaml
+        - ../k8s/backend-deployment.yaml
+        - ../k8s/frontend-deployment.yaml
+        - ../k8s/service-backend.yaml
+        - ../k8s/service-frontend.yaml
+        - ../k8s/ingress.yaml
+
+    - name: Wait for all pods to be ready
+      command: kubectl wait --for=condition=ready pod --all --timeout=180s -n grocery
+      ignore_errors: yes
+
+    - name: Start Minikube tunnel (for LoadBalancer / Ingress)
+      command: minikube tunnel
+      async: 60
+      poll: 0
+      ignore_errors: yes
+
+    - name: Display Service Status
+      command: kubectl get svc -n grocery
+      register: services_output
+    - debug:
+        var: services_output.stdout_lines
+
+    - name: Display Ingress
+      command: kubectl get ingress -n grocery
+      register: ingress_output
+    - debug:
+        var: ingress_output.stdout_lines
+
+    - name: Print frontend access URL
+      debug:
+        msg: "Access the application via: http://127.0.0.1 (or ingress host)"

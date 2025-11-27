@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grocery-backend
+  namespace: grocery
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grocery-backend
+  template:
+    metadata:
+      labels:
+        app: grocery-backend
+    spec:
+      containers:
+        - name: grocery-backend
+          image: hemavarshiniramesh/grocery-backend:latest
+          ports:
+            - containerPort: 2026
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mysql://mysql-service:3306/grocery?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "root"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "docker"
+            - name: SERVER_PORT
+              value: "2026"

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grocery-frontend
+  namespace: grocery
+spec:
+  selector:
+    matchLabels:
+      app: grocery-frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: grocery-frontend
+    spec:
+      containers:
+        - name: grocery-frontend
+          image: hemavarshiniramesh/grocery-frontend:latest
+          ports:
+            - containerPort: 80
