@@ -12,7 +12,7 @@ import com.klef.fsd.springboot.service.CartService;
 
 import java.util.Optional;
 
-@CrossOrigin("*")
+
 @RestController
 @RequestMapping("/cart")
 public class CartController {

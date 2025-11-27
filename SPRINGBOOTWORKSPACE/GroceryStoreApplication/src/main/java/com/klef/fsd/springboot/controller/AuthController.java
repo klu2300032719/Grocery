@@ -10,7 +10,7 @@ import com.klef.fsd.springboot.repository.UserRepository;
 
 import java.util.Optional;
 
-@CrossOrigin("*")
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {

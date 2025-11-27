@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/products")
-@CrossOrigin("*")  // ✅ Allow React frontend
+
 public class ProductController {
 
     @Autowired

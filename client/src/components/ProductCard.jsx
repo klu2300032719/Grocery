@@ -8,19 +8,19 @@ const ProductCard = ({ products }) => {
 
   if (!products) return null;
 
-  // ✅ Handle both snake_case and camelCase
+  // Handle both snake_case and camelCase from backend
   const imageUrl = products.imageUrl || products.image_url || "/fallback.png";
 
   return (
     <div
       onClick={() => {
-        navigate(`/products/${products.id}`);
+        navigate(`/product/${products.id}`);
         scrollTo(0, 0);
       }}
-      className="flex flex-col h-full border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white w-full"
+      className="flex flex-col h-full border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white w-full cursor-pointer"
     >
       {/* Product Image */}
-      <div className="group cursor-pointer flex items-center justify-center px-2">
+      <div className="group flex items-center justify-center px-2">
         <img
           className="group-hover:scale-105 transition max-h-40 object-contain"
           src={imageUrl}
@@ -35,7 +35,7 @@ const ProductCard = ({ products }) => {
           {products.name}
         </p>
 
-        {/* Stars */}
+        {/* Star Ratings */}
         <div className="flex items-center gap-0.5">
           {Array(5)
             .fill("")
@@ -50,7 +50,7 @@ const ProductCard = ({ products }) => {
           <p>(4)</p>
         </div>
 
-        {/* Price + Add to Cart */}
+        {/* Pricing & Add to Cart */}
         <div className="flex items-end justify-between mt-auto">
           <p className="md:text-xl text-base font-medium text-primary">
             {currency}
@@ -64,7 +64,10 @@ const ProductCard = ({ products }) => {
           </p>
 
           {/* Cart Buttons */}
-          <div onClick={(e) => e.stopPropagation()} className="text-primary">
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="text-primary"
+          >
             {!cartItems[products.id] ? (
               <button
                 className="flex items-center justify-center gap-1 bg-primary/10 border border-primary/40 md:w-[80px] w-[64px] h-[34px] rounded cursor-pointer"

@@ -12,7 +12,7 @@ import com.klef.fsd.springboot.service.OrderService;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin("*")
+
 @RestController
 @RequestMapping("/orders")
 public class OrderController {

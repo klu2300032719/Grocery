@@ -9,7 +9,7 @@ import com.klef.fsd.springboot.service.SellerService;
 
 import java.util.List;
 
-@CrossOrigin("*")
+
 @RestController
 @RequestMapping("/sellers")
 public class SellerController {
